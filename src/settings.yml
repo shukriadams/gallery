@@ -1,3 +1,7 @@
+title: My Porfolio
+subtitle: Art by so-and-so
+googleAnalyticsCode: null
+facebookAppId: null
 galleries:
     landscapes: # this is the key your will be referred to with, used in links etc
         title: Landscapes # for display onle
@@ -33,3 +37,6 @@ biog:
 
 shop:
     Add your shop text here. Markup works too.
+
+footer:
+    Add your footer text here. Markup works too.

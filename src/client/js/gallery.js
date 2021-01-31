@@ -75,7 +75,8 @@
                 },
                 loadFacebook : function(){
                     try{
-                        FB.XFBML.parse();
+                        if (window.FB)
+                            FB.XFBML.parse();
                     }
                     catch(ex)
                     {

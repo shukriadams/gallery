@@ -1,7 +1,7 @@
 <div id="wrapper">
 
     <div id="header">
-        <div id="title"><span id="main"><a href="javascript:void(0)" data-route="/">manafeed</a></span><div id="subtitle">art by shukri adams</div> </div>
+        <div id="title"><span id="main"><a href="javascript:void(0)" data-route="/">{{obj.title}}</a></span><div id="subtitle">{{obj.subtitle}}</div> </div>
         <div id="headers">
             <div id="topheader">
                 <ul>
@@ -21,10 +21,10 @@
 
     <div id="footer">
         <div class="footer-item">
-            <div class="fb-page" data-href="https://www.facebook.com/manafeed" data-width="250" data-height="70" data-small-header="true" data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="false" data-show-posts="false"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/manafeed"><a href="https://www.facebook.com/manafeed">Shukri Adams - Art</a></blockquote></div></div>
+            {{obj.footer}}            
         </div>
         <ul class="footer-item facebook">
-            <li>Code / design by Shukri Adams.</li>
+            <li>Code / design by <a href="https://github.com/shukriadams/gallery">Shukri Adams</a></li>
             <li>Based on a layout by <a href="http://www.cancerbox.com/photoblog/" title="">Cancerbox</a>,
                 gallery by <a href="http://www.twospy.com/galleriffic">Twospy</a>.</li>
         </ul>

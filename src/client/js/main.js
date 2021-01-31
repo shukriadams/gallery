@@ -10,6 +10,7 @@
         currentView: null,
         root: null,
         dataLoaded : false,
+
         initialize: function () {
 
             // override underscore default template embed tags
@@ -27,14 +28,21 @@
                 }
             }
 
-            var master = app.views.template.instance({  templateFile : 'master', data : { menu : menuData } });
+            this.ensureData()
+
+            var master = app.views.template.instance({  templateFile : 'master', data : { 
+                title: _settings.title, 
+                subtitle: _settings.subtitle, 
+                menu : menuData,
+                footer: _settings.footer
+            }})
+
             master.render();
             var body = $('[data-role="content-root"]');
             $(body).empty();
             $(body).append(master.$el);
             this.root = $('#content');
 
-            this.ensureData()
         },
 
         routes: {

@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Manafeed</title>
+        <title>{{settings.title}}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -26,22 +26,34 @@
             </div>
         </div>
     </body>
+    <input id="facebookAppId" type="hidden" value="{{settings.facebookAppId}}">
+    <input id="googleAnalyticsCode" type="hidden" value="{{settings.googleAnalyticsCode}}">
     <script data-main="/js/setup"  src="/lib/require.js"></script>
     <script type="text/javascript">
     
         var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
         document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-        
-        try {
-            var pageTracker = _gat._getTracker("UA-1901384-3");
-            pageTracker._trackPageview();
-        } catch (err) { }
-        
+        var facebookAppId=document.querySelector('#facebookAppId').value,
+            googleAnalyticsCode = document.querySelector('#googleAnalyticsCode').value
+
+        console.log(facebookAppId)
+        console.log(googleAnalyticsCode)
+
+            try {
+                if (googleAnalyticsCode){
+                    var pageTracker = _gat._getTracker(googleAnalyticsCode);
+                    pageTracker._trackPageview();
+                }
+            } catch (err) { }
+
         (function(d, s, id) {
+            if (!facebookAppId)
+                return
+
             var js, fjs = d.getElementsByTagName(s)[0];
             if (d.getElementById(id)) return;
             js = d.createElement(s); js.id = id;
-            js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4&appId=140032826030820";
+            js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4&appId="+facebookAppId;
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
 

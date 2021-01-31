@@ -57,11 +57,14 @@ async function loadSettings(){
         // default settings
         version : 1,
         port: 8030,
+        title: 'Your title here',
+        subtitle : 'Your subtitle',
+        googleAnalyticsCode: null,
+        facebookAppId: null,
         biog: 'Add your biog here',
         links: 'Add your links text here',
         galleries : {}
     }, rawSettings);
-
     // generate gallery EJS/JSON files
 
     for(const galleryKey in settings.galleries) {
@@ -101,7 +104,8 @@ async function loadSettings(){
                 browser = browserDetect(req.headers['user-agent']),
                 view = await handlebarsLoader.getPage('index'),
                 model = {
-                    galleries
+                    galleries,
+                    settings
                 },
                 agent = (req.headers['user-agent'] ||'').toLowerCase()
     
