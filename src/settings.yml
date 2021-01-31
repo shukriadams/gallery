@@ -11,13 +11,14 @@ galleries:
                 description: Take in the hills outside Placeville. More info <a href="http://example.com">here</a>
                 image: film/ph26.jpg
                 thumb: film/ph26_t.jpg
-
+                splash: true
+                
             landscape2: # once again, this the key your image will be referred with, in urls etc
                 title: Landscape Study 02
                 description: Pretty self-explanatory
                 image: film/ph30.jpg
                 thumb: film/ph30_t.jpg
-    
+                
     portraits:
         title: Portraits
         images:

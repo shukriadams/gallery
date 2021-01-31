@@ -7,7 +7,7 @@ let http = require('http'),
     handlebarsLoader = require('madscience-handlebarsloader'),
     app = Express(),
     path = require('path'),
-    galleries = [],
+    galleryNames = [],
     settings = null,
     portfolioData = null
 
@@ -19,8 +19,9 @@ async function loadPortfolio(){
         portfolioFiles = await fsUtils.readFilesUnderDir('./client/portfolio/json/galleries')
         for (const portfolioFile of portfolioFiles){
             const galleryName = fsUtils.fileNameWithoutExtension(portfolioFile)
-            galleries.push(fsUtils.fileNameWithoutExtension(galleryName))
+            galleryNames.push(fsUtils.fileNameWithoutExtension(galleryName))
             let galleryDate = await fs.readJson(portfolioFile)
+
             for (const item of galleryDate.images){
                 item.gallery = galleryName
                 portfolioData[item.key] = item
@@ -28,7 +29,26 @@ async function loadPortfolio(){
         }
 
         const outSettings = Object.assign({}, settings)
-        outSettings.galleries = galleries
+        outSettings.galleries = galleryNames
+
+        // get splash image + gallery
+        for (const galleryKey in settings.galleries){
+            const images = settings.galleries[galleryKey].images || {}
+            for (const imageKey in images){
+                // force the first found item to be fallback splash
+                if (!outSettings.splashImage){
+                    outSettings.splashImage = images[imageKey].image
+                    outSettings.splashGallery = galleryKey
+                }
+
+                if (images[imageKey].splash){
+                    outSettings.splashImage = images[imageKey].image
+                    outSettings.splashGallery = galleryKey
+                    break
+                }
+            }
+        }
+
 
         await fs.outputJson('./client/portfolio/json/settings.ejs', outSettings, { spaces : 4})
 
@@ -67,7 +87,7 @@ async function loadSettings(){
     }, rawSettings);
     // generate gallery EJS/JSON files
 
-    for(const galleryKey in settings.galleries) {
+    for(const galleryKey in settings.galleryNames) {
         const galleryIn = settings.galleries[galleryKey],
             galleryOut = {
                 name : galleryKey,
@@ -104,7 +124,7 @@ async function loadSettings(){
                 browser = browserDetect(req.headers['user-agent']),
                 view = await handlebarsLoader.getPage('index'),
                 model = {
-                    galleries,
+                    galleryNames,
                     settings
                 },
                 agent = (req.headers['user-agent'] ||'').toLowerCase()
