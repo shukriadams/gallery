@@ -1,0 +1,12 @@
+{
+    "name": "gallery",
+    "version": "0.0.0",
+    "dependencies": {
+        "express": "4.16.3",
+        "browser-detect" : "0.2.28",
+        "fs-extra" : "9.1.0", 
+        "madscience-fsUtils": "https://github.com/shukriadams/node-fsUtils.git#0.0.8",
+        "madscience-handlebarsloader": "https://github.com/shukriadams/madscience-handlebarsloader.git#0.0.3"
+    },
+    "devDependencies": {}
+}

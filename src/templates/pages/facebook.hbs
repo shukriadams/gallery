@@ -1,0 +1,16 @@
+<html>
+<head>
+    <title>{{image.title}}</title>
+    <meta property="og:title" content="{{image.title}}" />
+    <meta property="og:description" content="{{image.description}}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="/image/{{image.key}}" />
+    <meta property="og:image" content="/portfolio/images/{{image.mainSrc}}" />
+</head>
+<body>
+    <h1>
+        {{image.title}}
+    </h1>
+    <img src="/portfolio/images/{{image.mainSrc}}" />
+</body>
+</html>

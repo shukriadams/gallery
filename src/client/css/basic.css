@@ -1,0 +1,47 @@
+/* Gallery styles, I have forced #galleryWrapper as the parent to prevent collisions with other declarations */
+#galleryWrapper div#ads {
+	clear: both;
+	padding: 12px 0 12px 66px;
+}
+#galleryWrapper div#footer {
+	clear: both;
+	color: #777;
+	margin: 0 auto;
+	padding: 20px 0 40px;
+	text-align: center;
+}
+
+#galleryWrapper div#footer {
+    color: #888;
+}
+
+#galleryWrapper div.image-desc {
+    line-height: 1.3em;
+    padding-top: 12px;
+}
+#galleryWrapper div.download {
+    margin-top: 8px;
+}
+
+#galleryWrapper div.photo-index {
+    color: #888;
+}
+
+#galleryWrapper div.loader {
+    background-image: url(/images/loaderWhite.gif);
+}
+#galleryWrapper div.slideshow img {
+    border-color: #333;
+}
+#galleryWrapper ul.thumbs li.selected a.thumb {
+    background: #fff;
+}
+
+#galleryWrapper div.pagination a:hover {
+    background-color: #111;
+}
+#galleryWrapper div.pagination span.current {
+    background-color: #fff;
+    border-color: #fff;
+    color: #000;
+}

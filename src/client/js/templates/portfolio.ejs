@@ -1,0 +1,84 @@
+<div class="darkPage">
+    <div class="navigation-container">
+        <div id="thumbs" class="navigation">
+
+            <a class="pageLink prev" style="background-image: url(/images/prevPageArrowWhite.gif);visibility: hidden;" href="#" title="Previous Page"></a>
+
+            <ul class="thumbs noscript">
+
+                {% for (var i = 0; i < obj.portfolio.images.length ; i ++) {
+                    var image = obj.portfolio.images[i];
+                    %}
+                    <li>
+                        <a class="thumb" data-key="{{ image.key }}" href="/portfolio/images/{{ image.mainSrc}}" title="{{ image.title}}">
+                            <img src="/portfolio/images/{{ image.thumbSrc}}" alt="{{ image.title}}" />
+                        </a>
+                        <div class="caption">
+                            <div class="image-title">{{ image.title}}</div>
+                            <div class="image-desc">{{ image.description}}</div>
+
+                            {% if (image.products.length > 0){ %}
+                                <div class="image-sale-header">Prints available : </div>
+                                <div class="image-sale-table">
+                                {% for (var j = 0; j < image.products.length ; j ++) {
+                                    var product = image.products[j];
+                                    %}
+                                    <div class="image-sale-row">
+                                        <div class="image-sale-description">{{ product.description}}</div>
+                                        <div class="image-sale-price">{{ product.price}}</div>
+                                        <div class="image-sale-cart">
+                                            {% if (product.paypayButtonId) { %}
+                                                <form target="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post">
+                                                    <input type="hidden" name="cmd" value="_s-xclick">
+                                                    <input type="hidden" name="hosted_button_id" value="{{product.paypayButtonId}}">
+                                                    <input type="image" src="http://manafeed.com/images/addToCart.png" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+                                                    <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+                                                </form>
+                                            {% } else { %}
+                                                Available in Copenhagen only. <a href="mailto:shukri.adams@gmail.com">Email</a> for details.
+                                            {% }%}
+                                        </div>
+                                    </div>
+                                {% } %}
+                                </div>
+
+                                <div class="image-sale-goToCartWrapper">
+                                    <form target="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post" >
+                                        <input type="hidden" name="cmd" value="_cart">
+                                        <input type="hidden" name="business" value="GK2GV6DFN9P7L">
+                                        <input type="hidden" name="display" value="1">
+                                        <input type="image" src="http://manafeed.com/images/viewCart.png" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+                                        <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+                                    </form>
+
+
+                                </div>
+                            {% } %}
+
+                            <div class="image-socialmedia">
+                                <div class="fb-like" data-href="http://www.manafeed.com/image/{{ image.key }}" data-width="250" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
+                            </div>
+
+                        </div>
+                    </li>
+                {% } %}
+
+
+            </ul>
+            <a class="pageLink next" style="background-image: url(/images/nextPageArrowWhite.gif); visibility: hidden;" href="#" title="Next Page"></a>
+        </div>
+    </div>
+    <div class="content">
+        <div class="slideshow-container">
+            <div id="controls" class="controls"></div>
+            <div id="loading" class="loader"></div>
+            <div id="slideshow" class="slideshow"></div>
+        </div>
+        <div id="caption" class="caption-container">
+            <div class="photo-index"></div>
+        </div>
+    </div>
+    <!-- End Gallery Html Containers -->
+    <div style="clear: both;"></div>
+
+</div>

@@ -1,0 +1,66 @@
+<div class="darkPage">
+    <div class="thinPageContent">
+        <h2>Shop Info</h2>
+        <hr />
+        <ul>
+            <li>
+                Canvas prints are available in Copenhagen, Denmark only, and
+                only where they're physically displayed. Sorry about this inconvenience, but there are still
+                too many logistical issues putting canvases in the mail. This will hopefully change in the future.
+            </li>
+            <li>
+                I do all my printing through a dedicated one-man art printing company in Copenhagen. My guy is usually fast (days) but it
+                can take a few weeks to get a print done depending on his workload.
+            </li>
+            <li>
+                All online purchases are currently handled with Paypal.
+            </li>
+            <li>
+                All prices are in Euros, and include a flat fee for shipping and handling. All canvas prices are in Danish Kroner and
+                there's no shipping because you collect them yourself.
+            </li>
+            <li>
+                I ship to anywhere in the world, but I reserve the right to cancel an order if I can't ship to the requested
+                destination, or if it's too expensive. Should this happen you will receive a full refund of course.
+            </li>
+            <li>
+                Not all images have prints, but feel free to inquire if you want a particular one, this can likely be arranged.
+            </li>
+        </ul>
+
+        <h2>Available prints</h2>
+        <hr />
+
+        {% if (obj.images.length === 0) { %}
+        <div>
+            There aren't any items available for sale yet.
+        </div>
+        {% } else { %}
+        {% for (var i = 0 ; i < obj.images.length ; i ++){
+        var image = obj.images[i];
+        %}
+
+        <div class="shop-row">
+            <div class="shop-image">
+                <a href="/image/{{ image.key}}">
+                    <img src="/portfolio/images/{{image.thumbSrc}}" />
+                </a>
+            </div>
+            <div class="shop-products">
+                {% for (var j = 0; j < image.products.length ; j ++) {
+                var product = image.products[j];
+                %}
+                <div class="shop-product">{{ product.description}}</div>
+                {% } %}
+                <div class="shop-link">
+                    <a href="/image/{{ image.key}}">
+                        More info
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% } %}
+        {% } %}
+
+    </div>
+</div>

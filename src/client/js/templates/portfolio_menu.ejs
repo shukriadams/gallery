@@ -1,0 +1,5 @@
+<ul>
+    {% for (var i in obj){ %}
+        <li><a data-link-key="{{ obj[i].name }}" href="javascript:void(0)" data-route="portfolio/{{ obj[i].name }}">{{ obj[i].title}}</a></li>
+    {% } %}
+</ul>
