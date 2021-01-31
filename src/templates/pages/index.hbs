@@ -1,18 +1,16 @@
 <html>
     <head>
         <title>{{settings.title}}</title>
+        
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-        <meta http-equiv="content-type" name="description" content="Art by Shukri Adams" />
-        <meta http-equiv="content-type" name="keywords" content="Manafeed, Shukri Adams, Shukri, Adams, photographer, photography, dark, art, surreal, horror, melancholy" />
-
-
-        <meta property="og:title" content="Manafeed" />
-        <meta property="og:description" content="Art by Shukri Adams" />
+        <meta http-equiv="content-type" name="description" content="{{settings.description}}" />
+        <meta http-equiv="content-type" name="keywords" content="{{settings.keywords}}" />
+        <meta property="og:title" content="{{settings.title}}" />
+        <meta property="og:description" content="{{settings.description}}" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="http://www.manafeed.com" />
-        <meta property="og:image" content="http://www.manafeed.com/portfolio/mm/mm71.jpg" />
+        <meta property="og:url" content="{{url}}" />
+        <meta property="og:image" content="/portfolio/images/{{settings.splashImage}}" />
 
         <link rel="stylesheet" href="/css/galleriffic-5.css" />
         <link rel="stylesheet" href="/css/basic.css" />
@@ -25,19 +23,16 @@
                 loading <span id="progress"></span>
             </div>
         </div>
-    </body>
-    <input id="facebookAppId" type="hidden" value="{{settings.facebookAppId}}">
-    <input id="googleAnalyticsCode" type="hidden" value="{{settings.googleAnalyticsCode}}">
-    <script data-main="/js/setup"  src="/lib/require.js"></script>
-    <script type="text/javascript">
-    
-        var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-        document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-        var facebookAppId=document.querySelector('#facebookAppId').value,
-            googleAnalyticsCode = document.querySelector('#googleAnalyticsCode').value
+        <input id="facebookAppId" type="hidden" value="{{settings.facebookAppId}}">
+        <input id="googleAnalyticsCode" type="hidden" value="{{settings.googleAnalyticsCode}}">
+        <script data-main="/js/setup"  src="/lib/require.js"></script>
+        <script type="text/javascript">
+        
+            let gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www."),
+                facebookAppId=document.querySelector('#facebookAppId').value,
+                googleAnalyticsCode = document.querySelector('#googleAnalyticsCode').value
 
-        console.log(facebookAppId)
-        console.log(googleAnalyticsCode)
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
 
             try {
                 if (googleAnalyticsCode){
@@ -46,16 +41,17 @@
                 }
             } catch (err) { }
 
-        (function(d, s, id) {
-            if (!facebookAppId)
-                return
+            (function(d, s, id) {
+                if (!facebookAppId)
+                    return
 
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
-            js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4&appId="+facebookAppId;
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4&appId="+facebookAppId;
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
 
-    </script>
+        </script>
+    </body>
 </html>

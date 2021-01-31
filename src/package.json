@@ -1,6 +1,9 @@
 {
     "name": "gallery",
     "version": "0.0.0",
+    "scripts": {
+        "start" : "node index"
+    },
     "dependencies": {
         "express": "4.16.3",
         "browser-detect" : "0.2.28",

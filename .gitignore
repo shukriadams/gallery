@@ -1,3 +1,12 @@
 src/node_modules
 src/client/portfolio
 vagrant/.vagrant
+build/.clone
+build/.stage
+src/client/css/style.min.css
+src/client/js/scripts.min.js
+src/client/js/bundle.js
+src/client/js/bundle.min.js
+src/client/css/bundle.css
+src/client/css/bundle.min.css
+build/.stage.tar.gz

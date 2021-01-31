@@ -28,27 +28,27 @@ async function loadPortfolio(){
             }
         }
 
-        const outSettings = Object.assign({}, settings)
-        outSettings.galleries = galleryNames
-
         // get splash image + gallery
         for (const galleryKey in settings.galleries){
             const images = settings.galleries[galleryKey].images || {}
             for (const imageKey in images){
                 // force the first found item to be fallback splash
-                if (!outSettings.splashImage){
-                    outSettings.splashImage = images[imageKey].image
-                    outSettings.splashGallery = galleryKey
+                if (!settings.splashImage){
+                    settings.splashImage = images[imageKey].image
+                    settings.splashGallery = galleryKey
                 }
 
                 if (images[imageKey].splash){
-                    outSettings.splashImage = images[imageKey].image
-                    outSettings.splashGallery = galleryKey
+                    settings.splashImage = images[imageKey].image
+                    settings.splashGallery = galleryKey
                     break
                 }
             }
         }
 
+        const outSettings = Object.assign({}, settings)
+        // convert hash table to array
+        outSettings.galleries = galleryNames
 
         await fs.outputJson('./client/portfolio/json/settings.ejs', outSettings, { spaces : 4})
 
@@ -125,6 +125,7 @@ async function loadSettings(){
                 view = await handlebarsLoader.getPage('index'),
                 model = {
                     galleryNames,
+                    url : req.get('host'),
                     settings
                 },
                 agent = (req.headers['user-agent'] ||'').toLowerCase()

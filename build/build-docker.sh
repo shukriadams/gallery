@@ -26,22 +26,14 @@ fi
 
 # build step 1: build frontend CSS/JS, and leaves it behind in .clone/src/dist folder. This build will yarn install dev modules, which we
 # want to delete
-docker run -v $(pwd)/.clone:/tmp/build shukriadams/node10build:0.0.3 sh -c "cd /tmp/build/src/build && sh ./build.sh --clean --version" 
-sudo rm -rf .clone/src/node_modules
-
 docker run -v $(pwd)/.clone:/tmp/build shukriadams/node10build:0.0.3 sh -c "cd /tmp/build/src && yarn --no-bin-links --ignore-engines --production"
-
 
 rm -rf .stage 
 mkdir -p .stage 
-mkdir -p .stage/public 
-cp -R .clone/src/node_modules .stage 
-cp -R .clone/src/ .stage 
-tar -czvf node/.stage.tar.gz .stage 
-
+cp -R .clone/src/* .stage 
+tar -czvf .stage.tar.gz .stage 
 
 docker build -t shukriadams/gallery . 
-
 
 if [ $DOCKERPUSH -eq 1 ]; then
     TAG=$(git describe --tags --abbrev=0) 
