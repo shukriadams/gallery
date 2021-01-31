@@ -9,4 +9,6 @@ src/client/js/bundle.js
 src/client/js/bundle.min.js
 src/client/css/bundle.css
 src/client/css/bundle.min.css
+src/client/json
 build/.stage.tar.gz
+build/content

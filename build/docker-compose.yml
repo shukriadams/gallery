@@ -1,0 +1,13 @@
+version: "2"
+services:
+    gallery:
+        image: shukriadams/gallery:latest
+        container_name: gallery-test
+        restart: unless-stopped
+        ports:
+            - 8031:8030
+        #command: /bin/sh -c "while true ;sleep 5; do continue; done"    
+        volumes:
+         - ./settings.yml:/usr/app/settings.yml
+         - ./content:/usr/app/client/portfolio:rw    
+         - ./json:/usr/app/client/json:rw    

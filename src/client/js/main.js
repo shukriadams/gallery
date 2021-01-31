@@ -92,10 +92,10 @@
                 return;
 
             // load portfolios
-            _settings = JSON.parse(new EJS({ url: '/portfolio/json/settings' }).text)
+            _settings = JSON.parse(new EJS({ url: '/json/settings' }).text)
 
             for (const gallery of _settings.galleries)
-                _portfolios[gallery] = JSON.parse(new EJS({ url: `/portfolio/json/galleries/${gallery}`}).text)
+                _portfolios[gallery] = JSON.parse(new EJS({ url: `/json/galleries/${gallery}`}).text)
 
             // normalize data structure
             var ids = [];

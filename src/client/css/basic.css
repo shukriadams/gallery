@@ -33,8 +33,14 @@
 #galleryWrapper div.slideshow img {
     border-color: #333;
 }
+
 #galleryWrapper ul.thumbs li.selected a.thumb {
     background: #fff;
+}
+
+.thumb-img {
+    max-width: 75px;
+    max-height: 75px;
 }
 
 #galleryWrapper div.pagination a:hover {

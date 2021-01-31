@@ -1,0 +1,28 @@
+title: test
+subtitle: 123
+description: sfgg
+keywords: dfd
+googleAnalyticsCode: null
+facebookAppId: null
+galleries:
+    portraits:
+        title: Portraits
+        images:
+            first:
+                image: 1.jpg
+                thumb: 1.jpg
+            second:
+                image: 2.jpg
+                thumb: 2.jpg
+                
+links:
+    links testing example
+
+biog:
+    buig testing example
+
+shop:
+    shop testing example
+
+footer:
+    footer testing example
