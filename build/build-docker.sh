@@ -37,7 +37,7 @@ docker build -t shukriadams/gallery .
 
 if [ $DOCKERPUSH -eq 1 ]; then
     TAG=$(git describe --tags --abbrev=0) 
-    docker login -u $DOCKER_USER -p $DOCKER_PASS 
+    docker login -u $DOCKER_USER -p $DOCKER_PASSWORD 
     docker tag shukriadams/gallery:latest shukriadams/gallery:$TAG 
     docker push shukriadams/gallery:$TAG 
 fi
