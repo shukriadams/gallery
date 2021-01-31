@@ -1,0 +1,21 @@
+name: Build docker container and push to repo
+
+# build on all tags
+on: 
+  push:
+    tags:
+      - '*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    services:
+      node:
+        image: shukriadams/node10build:0.0.3
+    steps:
+      - uses: actions/checkout@v1
+      - name: Build and push
+        run: cd build && sh ./build-docker.sh --ci --dockerpush
+        env:
+            DOCKER_USER: ${{ secrets.DOCKER_USER }}
+            DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
