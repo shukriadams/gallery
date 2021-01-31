@@ -10,8 +10,8 @@
                     var image = obj.portfolio.images[i];
                     %}
                     <li>
-                        <a class="thumb" data-key="{{ image.key }}" href="/portfolio/images/{{ image.mainSrc}}" title="{{ image.title}}">
-                            <img src="/portfolio/images/{{ image.thumbSrc}}" alt="{{ image.title}}" />
+                        <a class="thumb" data-key="{{ image.key }}" href="/portfolio/images/{{ image.image}}" title="{{ image.title}}">
+                            <img src="/portfolio/images/{{ image.thumb}}" alt="{{ image.title}}" />
                         </a>
                         <div class="caption">
                             <div class="image-title">{{ image.title}}</div>

@@ -12,13 +12,14 @@ body {
 	color:#999999;
 }
 
-h2 {
-	font-family: "Trebuchet MS", Verdana, sans-serif;
-	margin: 0 0 10px 0;
-	letter-spacing:-1px;
+h1 {
+	color: #ccc;
 }
 
 h2 {
+	font-family: "Trebuchet MS", Verdana, sans-serif;
+	margin: 0 0 10px 0;
+    letter-spacing:-1px;
 	padding-top: 30px;
 	color: #ccc;
 	font-size:13pt;

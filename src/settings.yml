@@ -1,0 +1,35 @@
+galleries:
+    landscapes: # this is the key your will be referred to with, used in links etc
+        title: Landscapes # for display onle
+        images:
+            landscape1: # once again, this the key your image will be referred with, in urls etc
+                title: Landscape Study 01
+                description: Take in the hills outside Placeville. More info <a href="http://example.com">here</a>
+                image: film/ph26.jpg
+                thumb: film/ph26_t.jpg
+
+            landscape2: # once again, this the key your image will be referred with, in urls etc
+                title: Landscape Study 02
+                description: Pretty self-explanatory
+                image: film/ph30.jpg
+                thumb: film/ph30_t.jpg
+    
+    portraits:
+        title: Portraits
+        images:
+            first:
+                image: film/ph53.jpg
+                thumb: film/ph53_t.jpg
+            second:
+                image: film/ph56.jpg
+                thumb: film/ph56_t.jpg                
+                
+links:
+    Add your links text here. Markup works too.
+
+biog:
+    Add your biog text here. Markup works too.    
+    
+
+shop:
+    Add your shop text here. Markup works too.

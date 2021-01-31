@@ -2,10 +2,13 @@ let http = require('http'),
     Express = require('express'),
     fsUtils = require('madscience-fsUtils'),
     fs = require('fs-extra'),
+    yaml = require('js-yaml'),
+    process = require('process'),
     handlebarsLoader = require('madscience-handlebarsloader'),
     app = Express(),
-    port = 8030,
+    path = require('path'),
     galleries = [],
+    settings = null,
     portfolioData = null
 
 async function loadPortfolio(){
@@ -14,7 +17,6 @@ async function loadPortfolio(){
 
     try {
         portfolioFiles = await fsUtils.readFilesUnderDir('./client/portfolio/json/galleries')
-
         for (const portfolioFile of portfolioFiles){
             const galleryName = fsUtils.fileNameWithoutExtension(portfolioFile)
             galleries.push(fsUtils.fileNameWithoutExtension(galleryName))
@@ -24,25 +26,73 @@ async function loadPortfolio(){
                 portfolioData[item.key] = item
             }
         }
-        
-        await fs.writeJson('./client/portfolio/json/_data.ejs', {
-            galleries
-        })
+
+        const outSettings = Object.assign({}, settings)
+        outSettings.galleries = galleries
+
+        await fs.outputJson('./client/portfolio/json/settings.ejs', outSettings, { spaces : 4})
 
     } catch(ex){
         console.log(ex)
     }
 }
 
+async function loadSettings(){
+    
+    if (!await fs.exists('./settings.yml'))
+        throw 'settings.yml not found.'
+
+    let rawSettings = null
+
+    try {
+        const settingsYML = await fs.readFile('./settings.yml', 'utf8');
+        rawSettings = yaml.safeLoad(settingsYML)
+    } catch (e) {
+        console.log('Error reading settings.yml')
+        console.log(e)
+        return process.exit(1)
+    }    
+
+    settings = Object.assign({
+        // default settings
+        version : 1,
+        port: 8030,
+        biog: 'Add your biog here',
+        links: 'Add your links text here',
+        galleries : {}
+    }, rawSettings);
+
+    // generate gallery EJS/JSON files
+
+    for(const galleryKey in settings.galleries) {
+        const galleryIn = settings.galleries[galleryKey],
+            galleryOut = {
+                name : galleryKey,
+                title : galleryIn.title,
+                images : []
+            }
+
+        galleryIn.images = galleryIn.images || {}
+        for (const imageKey in galleryIn.images){
+            const image = galleryIn.images[imageKey]
+            image.key = imageKey
+            galleryOut.images.push(image)
+        }
+
+        await fs.outputJson(`./client/portfolio/json/galleries/${galleryKey}.ejs`, galleryOut, { spaces : 4})
+    }
+}
+
 (async ()=>{
+    
+    await loadSettings()
+    await loadPortfolio()
 
     handlebarsLoader.initialize({ 
         pages : './templates/pages',
-        // helpers : './templates/helpers',
         partials : './templates/partials'
     })
     
-
     
     app.use(Express.static('./client'))
     app.get(/^[^.]+$/, async function (req, res) {
@@ -85,11 +135,11 @@ async function loadPortfolio(){
         }
     })
     
-    await loadPortfolio()
+
     
     let server = http.createServer(app)
-    server.listen(port)
-    console.log(`Gallery started, listening on port ${port} `)
+    server.listen(settings.port)
+    console.log(`Gallery started, listening on port ${settings.port} `)
 
 })()
 

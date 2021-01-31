@@ -3,6 +3,7 @@
     "use strict";
     var _router = null,
         _portfolios  = [],
+        _settings = null,
         _imagesWithProducts = [],
         Router = Backbone.Router.extend({
 
@@ -33,6 +34,7 @@
             $(body).append(master.$el);
             this.root = $('#content');
 
+            this.ensureData()
         },
 
         routes: {
@@ -56,9 +58,9 @@
                 return;
 
             // load portfolios
-            const siteData = JSON.parse(new EJS({ url: "/portfolio/json/_data"}).text)
+            _settings = JSON.parse(new EJS({ url: '/portfolio/json/settings' }).text)
 
-            for (const gallery of siteData.galleries)
+            for (const gallery of _settings.galleries)
                 _portfolios[gallery] = JSON.parse(new EJS({ url: `/portfolio/json/galleries/${gallery}`}).text)
 
             // normalize data structure
@@ -86,8 +88,6 @@
         },
 
         home : function(){
-            this.ensureData();
-
             if (window.loadr) {
                 window.loadr.stop()
                 window.loadr = null;
@@ -97,7 +97,7 @@
             this.setMenuState("header", "");
 
             // todo remove this hardcoded ref
-            var image = _portfolios["fata"].images[0].mainSrc;
+            var image = _portfolios["fata"].images[0].image;
             var route = "portfolio/" +  _portfolios["fata"].name; // todo make route builder
             var view = app.views.template.instance({ templateFile : 'home', data : { mainImage : image, startRoute : route } });
             this._showPageView(view);
@@ -112,12 +112,10 @@
         },
 
         shop : function(){
-            this.ensureData();
-
             $('#subheader').empty();
             this.setMenuState("header", "shop");
 
-            var view = app.views.template.instance({ templateFile : 'shop', data : { images : _imagesWithProducts } });
+            var view = app.views.template.instance({ templateFile : 'shop', data : { images : _imagesWithProducts, content : _settings.shop } });
             this._showPageView(view);
         },
 
@@ -133,7 +131,7 @@
             $('#subheader').empty();
             this.setMenuState("header", "biog");
 
-            var view = app.views.template.instance({ templateFile : 'biog' });
+            var view = app.views.template.instance({ templateFile : 'biog', data : { content : _settings.biog } });
             this._showPageView(view);
         },
 
@@ -166,9 +164,8 @@
             $('#subheader').empty();
             this.setMenuState("header", "links");
 
-            var view = app.views.template.instance({ templateFile : 'links' });
+            var view = app.views.template.instance({ templateFile : 'links', data : { content : _settings.links } });
             this._showPageView(view);
-
 
         },
 
@@ -177,7 +174,6 @@
         },
 
         portfolio : function(portfolio, img){
-            this.ensureData();
             var imgIndexInGallery;
 
             if (!portfolio){
