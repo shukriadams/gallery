@@ -47,7 +47,9 @@ async function loadSettings(){
         return process.exit(1)
     }
 
-    // write a gallery.json file for each gallery defined in settings.yml - this is needed by the client app
+    // clean out existing galleries on start
+    await fs.remove('./client/json')
+    // recreate folder
     await fs.ensureDir('./client/json/galleries')
 
     for(const galleryKey in settings.galleries) {

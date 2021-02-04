@@ -10,4 +10,3 @@ services:
         volumes:
          - ./settings.yml:/usr/app/settings.yml
          - ./content:/usr/app/client/portfolio:rw    
-         - ./json:/usr/app/client/json:rw    

@@ -10,12 +10,10 @@ sudo apt install docker.io -y
 sudo apt install docker-compose -y
 sudo usermod -aG docker vagrant
 
-# force startup folder to vagrant project
-echo "cd /vagrant" >> /home/vagrant/.bashrc
+# force startup folder to /src folder in project
+echo "cd /vagrant/src" >> /home/vagrant/.bashrc
 
 # set hostname, makes console easier to identify
 sudo echo "gallery" > /etc/hostname
 sudo echo "127.0.0.1 gallery" >> /etc/hosts
 
-# force startup folder to /src folder in project
-echo "cd /vagrant/src" >> /home/vagrant/.bashrc
