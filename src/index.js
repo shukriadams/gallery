@@ -48,11 +48,19 @@ async function loadSettings(){
     }
 
     // clean out existing galleries on start
-    await fs.remove('./client/json/galleries')
-    await fs.remove('./client/json/settings.ejs')
+    try {
+        await fs.remove('./client/json/galleries')
+        await fs.remove('./client/json/settings.ejs')
+    } catch (ex){
+        console.log('error trying to clear up galleries')
+    }
 
     // recreate folder
-    await fs.ensureDir('./client/json/galleries')
+    try {
+        await fs.ensureDir('./client/json/galleries')
+    } catch(ex){
+        console.log('error creating galleries directory')
+    }
 
     for(const galleryKey in settings.galleries) {
         const galleryIn = settings.galleries[galleryKey],
