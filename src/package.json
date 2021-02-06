@@ -11,6 +11,5 @@
         "js-yaml": "3.13.1",
         "madscience-fsUtils": "https://github.com/shukriadams/node-fsUtils.git#0.0.8",
         "madscience-handlebarsloader": "https://github.com/shukriadams/madscience-handlebarsloader.git#0.0.3"
-    },
-    "devDependencies": {}
+    }
 }
