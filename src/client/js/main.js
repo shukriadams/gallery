@@ -2,7 +2,7 @@
 
     "use strict";
     var _router = null,
-        _portfolios  = [],
+        _portfolios = [],
         _settings = null,
         _imagesWithProducts = [],
         Router = Backbone.Router.extend({
@@ -83,7 +83,6 @@
             "portfolio/:port": "portfolio",
             "home" :  "home",
             "biog" :  "biog",
-            "purchase" :  "purchase",
             '*notFound': '404'
         },
 
@@ -132,14 +131,6 @@
 
             // todo remove this hardcoded ref
             var view = app.views.template.instance({ templateFile : 'home', data : { splashImage : _settings.splashImage, splashGallery : _settings.splashGallery } });
-            this._showPageView(view);
-        },
-
-        purchase : function(){
-            $('#subheader').empty();
-            this.setMenuState("header", "purchase");
-
-            var view = app.views.template.instance({ templateFile : 'purchase' });
             this._showPageView(view);
         },
 
@@ -239,7 +230,7 @@
 
             // do this before using name, rectifies invalid names
             var p = _portfolios[portfolio];
-            if (p == null) {
+            if (p === null) {
                 p = _portfolios[Object.keys(_portfolios)[0]];
                 portfolio = p.name;
             }
@@ -257,12 +248,9 @@
 
             var script = app.scripts.portfolio.type();
             script.run();
-
-
         },
 
         bindRoutes : function(){
-
             $('[data-route]').unbind();
             $('[data-route]').click(function(e){
                 var route = $(e.target).closest('[data-route]').data('route');

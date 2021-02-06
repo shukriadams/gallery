@@ -48,7 +48,9 @@ async function loadSettings(){
     }
 
     // clean out existing galleries on start
-    await fs.remove('./client/json')
+    await fs.remove('./client/json/galleries')
+    await fs.remove('./client/json/settings.ejs')
+
     // recreate folder
     await fs.ensureDir('./client/json/galleries')
 
