@@ -230,7 +230,7 @@
 
             // do this before using name, rectifies invalid names
             var p = _portfolios[portfolio];
-            if (p === null) {
+            if (!p) {
                 p = _portfolios[Object.keys(_portfolios)[0]];
                 portfolio = p.name;
             }
