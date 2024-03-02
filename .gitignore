@@ -1,6 +1,6 @@
 src/node_modules
 src/client/portfolio
-vagrant/.vagrant
+.vagrant
 build/.clone
 build/.stage
 src/client/css/style.min.css

@@ -1,0 +1,15 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+
+    config.vm.provider "hyperv"
+    config.vm.network "public_network"
+    config.vm.box = "generic/ubuntu2004"
+    config.vm.synced_folder "./../../", "/vagrant", type: "smb"
+    config.vm.provision :shell, path: "./../provision.sh"
+    config.vm.provider :hyperv do |v|
+        v.vmname  = "gallery" 
+    end
+
+end
